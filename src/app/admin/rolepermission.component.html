@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a [routerLink]="['/admin','dashboard']">{{'Menu.Dashboard' | translate }}</a></li>
+        <li class="active">{{'RolePermission.Role Permission Management' | translate }}</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="header">
+       <h2 *ngIf="action">{{'RolePermission.Add Role Permission' | translate }}</h2>
+         <h2 *ngIf="!action">{{'RolePermission.Update Role Permission' | translate }}</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block block-drop-shadow">
+            <div class="head bg-dot20">
+              <form [formGroup]="myRolePermissionFrom" (ngSubmit)="onRolePermission()">
+                <div class="form-row user-change-row" style="display: block;">
+                  <div class="col-md-12">
+                      <select class="form-control" formControlName="rol_id">
+                      <option value="">{{'RolePermission.Select Role' | translate }}</option>
+                      <option *ngFor="let role of roles" [ngValue]="role.rol_id">{{role.rol_name}}</option>
+                       </select>
+                    <control-messages [control]="myRolePermissionFrom.controls.rol_id"></control-messages>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                      <select class="form-control" formControlName="per_id">
+                      <option value="">{{'RolePermission.Select Permission' | translate }}</option>
+                      <option *ngFor="let permission of permissions" [ngValue]="permission.per_id">{{permission.per_name}}</option>
+                      </select>
+                    <control-messages [control]="myRolePermissionFrom.controls.per_id"></control-messages>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6 pull-right">
+                    <div class="col-md-6" *ngIf="action">
+                      <button type="Submit" [disabled]="!myRolePermissionFrom.valid" class="btn btn-success btn-block">{{'UserRole.Add' | translate}}</button>
+                    </div>
+                      <div class="col-md-6" *ngIf="!action">
+                      <button type="Submit" [disabled]="!myRolePermissionFrom.valid" class="btn btn-success btn-block">{{'UserRole.Update' | translate}}</button>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" (click)="resetcontrol();" class="btn btn-danger btn-block">{{'UserRole.Reset' | translate }}</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="col-md-8">
+      <div class="header">
+        <h2>{{'RolePermission.User Role Permission List' | translate }}</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block">
+            <div class="content">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="col-xs-2">
+                    <label class="label-control">{{'UserRole.Rows on page' | translate }}</label>
+                    <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
+                    <option [ngValue]="5">5</option>
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="15">15</option>
+                </select>
+                  </div>
+                  <div class="col-xs-5 pull-right">
+                    <label class="label-control">{{'UserRole.Search' | translate }}:</label>
+                    <input class="form-control input-sm" [(ngModel)]="filterQuery" placeholder="{{'UserRole.Search' | translate }}" />
+                  </div>
+                </div>
+              </div>
+              <table class="table table-striped" [mfData]="data | dataRolePermissionFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                <thead>
+                  <tr>
+                    <th style="width:20%">
+                      <mfDefaultSorter by="rol_name">{{'RolePermission.Role Name' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:60%">
+                      <mfDefaultSorter by="per_rest_url">{{'RolePermission.Permission REST_URL' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:20%">{{'Menu.Action' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of mf.data">
+                    <td>{{item.rol_name}}</td>
+                    <td>{{item.per_rest_url}}</td>
+                    <td>
+                      <button class="widget-icon widget-icon-edit" (click)="onRolePermissionEdit(item.per_rol_id,item.rol_id,item.per_id);">
+                      <span class="icon-edit"></span>
+                    </button>
+                      <button class="widget-icon widget-icon-delete" (click)="onRolePermissionDelete(item.per_rol_id);">
+                      <span class="icon-trash"></span>
+                    </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="4" style="text-align: right">
+                      <mfBootstrapPaginator></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <modal #myDeleteModal class="modal modal-white">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">{{'RolePermission.Delete Role Permission' | translate }}</h4>
+    </modal-header>
+    <modal-body>
+      {{'RolePermission.Are you sure you want to delete this Role Permission?' | translate }}
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="modal.dismiss()">{{'UserRole.Cancel' | translate }}</button>
+      <button type="button" class="btn btn-danger" (click)="onDelete()">{{'UserRole.Delete' | translate }}</button>
+    </modal-footer>
+  </modal>
+</div>

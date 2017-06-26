@@ -1,14 +1,61 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>BookPartner</title>
   <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="./assets/css/stylesheets.css" rel="stylesheet" type="text/css" />
+  <link href="./assets/css/toast-style.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/book.png">
+
+  <script type="text/javascript" src="./assets/js/plugins/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/plugins/bootstrap/bootstrap.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjqfhn_35K3XejoUYq6F-_PxAUH1OVaJw&libraries=places"></script>
+  <style>
+    .selection,
+    .mydpicon {
+      background: rgba(0, 0, 0, 0.2) !important;
+      border-color: transparent !important;
+      color: #FFF !important;
+    }
+
+    .mydpicon {
+      font-weight: normal !important;
+      font-size: 12px !important;
+    }
+
+    .selbtngroup {
+      background: rgba(0, 0, 0, 0.4) !important;
+      border-top-right-radius : 4px !important;
+      border-bottom-right-radius : 4px !important;
+      padding: 6px 6px !important;
+    }
+
+    .selectiongroup {
+      background-color: transparent !important;
+    }
+
+    .mydp,
+    .mydp .headertodaybtn {
+      border: none !important;
+    }
+
+    .mydp .btnpicker,
+    .mydp .headertodaybtn, .btnclear {
+      background: transparent !important;
+    }
+
+  </style>
 </head>
-<body>
+
+<body class="bg-img-num1">
   <app-root>Loading...</app-root>
 </body>
+
 </html>

@@ -1,0 +1,190 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a [routerLink]="['/admin','dashboard']">{{'Menu.Dashboard' | translate }}</a></li>
+        <li class="active">{{'Menu.Book Register' | translate }}</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="header">
+        <h2 *ngIf="action">{{'Book.Add Book' | translate }}</h2>
+        <h2 *ngIf="!action">{{'Book.Update Book' | translate }}</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block block-drop-shadow">
+            <div class="head bg-dot20">
+              <form [formGroup]="myBookFrom" (ngSubmit)="onBook()">
+                <div class="form-row user-change-row" style="display: block;">
+                  <div class="col-md-12">
+                    <select class="form-control" formControlName="cou_id">
+                        <option value="">{{'Register.Select Country' | translate }}</option>
+                        <option *ngFor="let country of countries" [ngValue]="country.cou_id">{{country.cou_description}}</option>
+                      </select>
+                    <control-messages [control]="myBookFrom.controls.cou_id"></control-messages>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <select class="form-control" formControlName="location_id">
+                        <option value="">{{'Book.Select Location' | translate }}</option>
+                        <option *ngFor="let location of locations" [ngValue]="location.loc_id">{{location.loc_description}}</option>
+                      </select>
+                    <control-messages [control]="myBookFrom.controls.location_id"></control-messages>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <input type="text" class="form-control" placeholder="{{'Book.Book Name' | translate }}" formControlName="boo_name">
+                    <control-messages [control]="myBookFrom.controls.boo_name"></control-messages>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <textarea type="text" rows="5" class="form-control" placeholder="{{'Book.Book Description' | translate }}" maxlength="200"
+                      formControlName="boo_description"></textarea>
+                    <control-messages [control]="myBookFrom.controls.boo_description"></control-messages>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <!--<input type="text" class="form-control" placeholder="Book Geo Localization" formControlName="boo_geolocalization">-->
+                    <input type="text" formControlName="boo_geolocalization" (setAddress)="getAddress($event)" googleplace />
+                    <control-messages [control]="myBookFrom.controls.boo_geolocalization"></control-messages>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <input type="text" class="form-control" placeholder="{{'Book.Book Year' | translate }}" formControlName="boo_year">
+                    <control-messages [control]="myBookFrom.controls.boo_year"></control-messages>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <input type="text" class="form-control" placeholder="{{'Book.Book Century' | translate }}" formControlName="boo_century">
+                    <control-messages [control]="myBookFrom.controls.boo_century"></control-messages>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <!--<div class="col-md-2">Book Photo:</div>-->
+                  <div class="col-md-12">
+                    <input type="file" placeholder="{{'Book.Book Photo' | translate }}" name="file" (change)="selectFile($event)" />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <img src="{{photoUrl}}" *ngIf="viewPhoto"> <br/>
+                    <!--<a href="{{photoUrl}}" target="_blank" *ngIf="viewPhoto" style="font-weight:bold;">view photo</a>-->
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6 pull-right">
+                    <div class="col-md-6" *ngIf="action">
+                      <button type="Submit" [disabled]="!myBookFrom.valid" class="btn btn-success btn-block">{{'UserRole.Add' | translate}}</button>
+                    </div>
+                    <div class="col-md-6" *ngIf="!action">
+                      <button type="Submit" [disabled]="!myBookFrom.valid" class="btn btn-success btn-block">{{'UserRole.Update' | translate}}</button>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" (click)="resetcontrol();" class="btn btn-danger btn-block">{{'Book.Clear' | translate }}</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="header">
+        <h2>{{'Book.Book List' | translate }}</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block">
+            <div class="content">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="col-xs-2">
+                    <label class="label-control">{{'UserRole.Rows on page' | translate }}</label>
+                    <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
+                    <option [ngValue]="5">5</option>
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="15">15</option>
+                </select>
+                  </div>
+                  <div class="col-xs-5 pull-right">
+                    <label class="label-control">{{'UserRole.Search' | translate }}:</label>
+                    <input class="form-control input-sm" [(ngModel)]="filterQuery" placeholder="{{'UserRole.Search' | translate }}" />
+                  </div>
+                </div>
+              </div>
+              <table class="table table-striped" [mfData]="data | dataBookFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+                [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                <thead>
+                  <tr>
+                    <th style="width:5%">
+                      <mfDefaultSorter by="boo_name">{{'Book.Book Name' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:60%">
+                      <mfDefaultSorter by="boo_description">{{'Book.Book Description' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:15%">{{'Menu.Action' | translate }}</th>
+                    <th style="width:5%" *ngIf="viewApprove">{{'Book.Approve?' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of mf.data">
+                    <td>{{item.boo_name}}</td>
+                    <td>{{item.boo_description}}</td>
+                    <td>
+                      <button class="widget-icon widget-icon-edit" (click)="onBooEdit(item.boo_id,item.cou_id, item.location_id, item.boo_name, item.boo_description, item.boo_geolocalization, item.book_photo, item.boo_year, item.boo_century);">
+                      <span class="icon-edit"></span>
+                    </button>
+                      <button class="widget-icon widget-icon-delete" (click)="onBooDelete(item.boo_id);">
+                      <span class="icon-trash"></span>
+                    </button>
+                    </td>
+                    <td *ngIf="viewApprove">
+                      <label class="switch" *ngIf="item.boo_approve == 1">
+                      <input type="checkbox" class="skip" checked value="0" (change)="onBookApprove(item.boo_id, $event);"/>
+                      <span ></span>
+                      </label>
+                      <label class="switch" *ngIf="item.boo_approve == 0">
+                      <input type="checkbox" class="skip" value="0" (change)="onBookApprove(item.boo_id, $event);"/>
+                      <span ></span>
+                      </label>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="4" style="text-align: right">
+                      <mfBootstrapPaginator></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <modal #myDeleteModal class="modal modal-white">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">{{'Book.Delete Book' | translate }}</h4>
+    </modal-header>
+    <modal-body>
+      {{'Book.Are you sure you want to delete this Book?' | translate }}
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="modal.dismiss()">{{'UserRole.Cancel' | translate }}</button>
+      <button type="button" class="btn btn-danger" (click)="onDelete()">{{'UserRole.Delete' | translate }}</button>
+    </modal-footer>
+  </modal>
+</div>

@@ -1,0 +1,125 @@
+{
+	"Login": {
+		"Sign in": "Sign in",
+		"Email": "Email",
+		"Password": "Password",
+		"Log In": "Log In",
+		"Register": "Register",
+		"Forgot your password?": "Forgot your password?",
+		"Go Back": "Go Back"
+	},
+	"Register": {
+		"First Name": "First Name",
+		"Last Name": "Last Name",
+		"Nick Name": "Nick Name",
+		"Confirm Password": "Confirm Password",
+		"Birth Date": "Birth Date",
+		"Select Country": "Select Country",
+		"Profile Photo": "Profile Photo",
+		"Already have an account?": "Already have an account?",
+		"Log in": "Log in"
+	},
+	"Forgot": {
+		"Retrive": "Retrive",
+		"Home": "Home"
+	},
+	"ResetPass": {
+		"Invaild URL": "Invaild URL",
+		"Submit": "Submit"
+	},
+	"Menu": {
+		"Dashboard": "Dashboard",
+		"Roles": "Roles",
+		"Permissions": "Permissions",
+		"Role Permission": "ROLE Permission",
+		"Location": "Location",
+		"Book Register": "Book Register",
+		"User Detail": "User Detail",
+		"Log Out": "Log Out",
+		"List of Read Books": "List of Read Books",
+		"Add New Book": "Add New Book",
+		"Action": "Action"
+	},
+	"UserRole": {
+		"Role Management": "Role Management",
+		"Add Role": "Add Role",
+		"Update Role": "Update Role",
+		"User Role List": "User Role List",
+		"Role Name": "Role name",
+		"Role Description": "Role Description",
+		"Add": "Add",
+		"Update": "Update",
+		"Reset": "Reset",
+		"Rows on page": "Rows on page",
+		"Search": "Search",
+		"Delete Role": "Delete Role",
+		"Are you sure you want to delete this Role?": "Are you sure you want to delete this Role?",
+		"Cancel": "Cancel",
+		"Delete": "Delete"
+	},
+	"Permission": {
+		"Permission Management": "Permission Management",
+		"Add Permission": "Add Permission",
+		"Update Permission": "Update Permission",
+		"Permission Name": "Permission Name",
+		"Permission Description": "Permission Description",
+		"Permission Rest URL": "Permission Rest URL",
+		"User Permission List": "User Permission List",
+		"Permission List" :"Permission List", 
+		"Permission Name ": "Permission Name ",
+		"Permission URL": "Permission URL",
+		"Delete Permission": "Delete Permission",
+		"Are you sure you want to delete this Permission?": "Are you sure you want to delete this Permission?"
+	},
+	"RolePermission": {
+		"Role Permission Management": "Role Permission Management",
+		"Add Role Permission": "Add Role Permission",
+		"Update Role Permission": "Update Role Permission",
+		"Select Role": "Select Role",
+		"Select Permission": "Select Permission",
+		"User Role Permission": "User Role Permission",
+		"Role Name": "Role Name",
+		"Permission REST_URL": "Permission REST_URL",
+		"User Role Permission List": "User Role Permission List",
+		"Delete Role Permission": "Delete Role Permission",
+		"Are you sure you want to delete this Role Permission?": "Are you sure you want to delete this Role Permission?"
+	},
+	"Location": {
+		"Location Management": "Location Management",
+		"Add Location": "Add Location",
+		"Update Location": "Update Location",
+		"Select Location Father": "Select Location Father",
+		"Location Name": "Location Name",
+		"Location List": "Location List",
+		"Location Father": "Location Father",
+		"Delete Location": "Delete Location",
+		"Are you sure you want to delete this Location?": "Are you sure you want to delete this Location?"
+	},
+	"Book": {
+		"Add Book": "Add Book",
+		"Update Book": "Update Book",
+		"Book": "Book",
+		"Book List": "Book List",
+		"Select Location": "Select Location",
+		"Book Name": "Book Name",
+		"Book Description": "Book Description",
+		"Enter a Loacation": "Enter a Loacation",
+		"Book Year": "Book Year",
+		"Book Century": "Book Century",
+		"Book Photo": "Book Photo",
+		"Clear": "Clear",
+		"Approve?": "Approve?",
+		"Delete Book": "Delete Book",
+		"Are you sure you want to delete this Book?": "Are you sure you want to delete this Book?"
+	},
+	"User": {
+		"User Management": "User Management",
+		"Users Details List": "Users Details List",
+		"Name": "Name",
+		"User Name": "User Name",
+		"NickName": "NickName",
+		"Creation Date": "Creation Date",
+		"Country": "Country",
+		"User List": "User List"
+	}
+}

@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <nav class="navbar brb" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-reorder"></span>
+                        </button>
+          <a class="navbar-brand" [routerLink]="['/user','dashboard']"><img src="./assets/img/book.png" /></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a [routerLink]="['/user','dashboard']">
+                <span class="icon-home"></span> {{'Menu.Dashboard' | translate }}
+              </a>
+            </li>
+             <li><a [routerLink]="['/user','addbook']"><span class="icon-book"></span>{{'Menu.Book Register' | translate }}</a></li>
+            <li><a [routerLink]="['/user','dashboard']"><span class="icon-user"></span>{{'Menu.User Detail' | translate }}</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <button style="background: transparent;border: 0px;" (click)="onLogOut();">
+                  <span class="icon-off"></span> {{'Menu.Log Out' | translate }}
+              </button>
+            </li>
+          </ul>
+          <div class="nav navbar-nav pull-right">
+             <select (change)="onLanguageChange($event);">
+                            <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+                            </select>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

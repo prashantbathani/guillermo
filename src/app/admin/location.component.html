@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a [routerLink]="['/admin','dashboard']">{{'Menu.Dashboard' | translate }}</a></li>
+        <li class="active">{{'Location.Location Management' | translate }}</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="header">
+        <h2 *ngIf="action">{{'Location.Add Location' | translate }}</h2>
+          <h2 *ngIf="!action">{{'Location.Update Location' | translate }}</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block block-drop-shadow">
+            <div class="head bg-dot20">
+              <form [formGroup]="myLocationFrom" (ngSubmit)="onLocation()">
+                <div class="form-row user-change-row" style="display: block;">
+                   <div class="col-md-12">
+                      <select class="form-control" formControlName="loc_id_father">
+                      <option value="">{{'Location.Select Location Father' | translate }}</option>
+                      <option *ngFor="let location of locations" [ngValue]="location.loc_id">{{location.loc_description}}</option>
+                       </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                   <div class="col-md-12">
+                    <input type="text" class="form-control" placeholder="{{'Location.Location Name' | translate }}" formControlName="loc_description">
+                    <control-messages [control]="myLocationFrom.controls.loc_description"></control-messages>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6 pull-right">
+                    <div class="col-md-6" *ngIf="action">
+                      <button type="Submit" [disabled]="!myLocationFrom.valid" class="btn btn-success btn-block">{{'UserRole.Add' | translate }}</button>
+                    </div>
+                      <div class="col-md-6" *ngIf="!action">
+                      <button type="Submit" [disabled]="!myLocationFrom.valid" class="btn btn-success btn-block">{{'UserRole.Update' | translate }}</button>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" (click)="resetcontrol();" class="btn btn-danger btn-block">{{'UserRole.Reset' | translate }}</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="col-md-8">
+      <div class="header">
+        <h2>{{'Location.Location List' | translate }}</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block">
+            <div class="content">
+                <div class="row">
+                <div class="col-md-12">
+                  <div class="col-xs-2">
+                    <label class="label-control">{{'UserRole.Rows on page' | translate }}</label>
+                    <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
+                    <option [ngValue]="5">5</option>
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="15">15</option>
+                </select>
+                  </div>
+                  <div class="col-xs-5 pull-right">
+                    <label class="label-control">{{'UserRole.Search' | translate }}:</label>
+                    <input class="form-control input-sm" [(ngModel)]="filterQuery" placeholder="{{'UserRole.Search' | translate }}" />
+                  </div>
+                </div>
+              </div>
+              <table class="table table-striped" [mfData]="data | dataLocationFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                <thead>
+                  <tr>
+                    <th style="width:40%">
+                       <mfDefaultSorter by="loc_father">{{'Location.Location Father' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:40%">
+                      <mfDefaultSorter by="loc_description">{{'Location.Location Name' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:20%">{{'Menu.Action' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of mf.data">
+                    <td>{{item.loc_father}}</td>
+                    <td>{{item.loc_description}}</td>
+                    <td>
+                      <button class="widget-icon widget-icon-edit" (click)="onLocationEdit(item.loc_id,item.loc_id_father,item.loc_description);">
+                      <span class="icon-edit"></span>
+                    </button>
+                      <button class="widget-icon widget-icon-delete" (click)="onLocationDelete(item.loc_id);">
+                      <span class="icon-trash"></span>
+                    </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="4" style="text-align: right">
+                      <mfBootstrapPaginator></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   <modal #myDeleteModal class="modal modal-white">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">{{'Location.Delete Location' | translate }}</h4>
+    </modal-header>
+    <modal-body>
+     {{'Location.Are you sure you want to delete this Location?' | translate }} 
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="modal.dismiss()">{{'UserRole.Cancel' | translate }}</button>
+      <button type="button" class="btn btn-danger" (click)="onDelete()">{{'UserRole.Delete' | translate }}</button>
+    </modal-footer>
+  </modal>
+</div>

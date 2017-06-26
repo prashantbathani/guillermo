@@ -1,0 +1,22 @@
+<h2>
+  {{'User.User List' | translate }}</h2>
+<div class="block">
+  <div style="height: 200px; overflow-y: scroll;" class="content">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th style="width:80%">
+            {{'User.User Name' | translate }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of UserList">
+          <td><input name="UserSelect" value="{{item.use_id}}" type="checkbox" (change)="onUserCheckChange($event)"></td>
+          <td>{{item.use_name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

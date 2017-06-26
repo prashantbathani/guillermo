@@ -1,0 +1,128 @@
+ <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar brb" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-reorder"></span>
+                        </button>
+                        <a class="navbar-brand" [routerLink]="['/','home']"><img src="./assets/img/book.png" /></a>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <div class=" nav navbar-nav pull-right">
+                            <select (change)="onLanguageChange($event);">
+                            <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+<div class="container">
+  <div class="registration-block">
+    <div class="block block-drop-shadow">
+      <div class="head bg-dot20 text-center">
+        <img src="./assets/img/signup.png" />
+      </div>
+      <form [formGroup]="mySignupForm" (ngSubmit)="onSignup();">
+        <div class="content controls npt">
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <span class="icon-user"></span>
+                </div>
+                <input type="text" class="form-control" placeholder="{{ 'Register.First Name' | translate }}" formControlName="FirstName" />
+              </div>
+              <control-messages [control]="mySignupForm.controls.FirstName"></control-messages>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <span class="icon-user"></span>
+                </div>
+                <input type="text" class="form-control" placeholder="{{ 'Register.Last Name' | translate }}" formControlName="LastName" />
+              </div>
+                <control-messages [control]="mySignupForm.controls.LastName"></control-messages>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <span class="icon-meh"></span>
+                </div>
+                <input type="text" class="form-control" placeholder="{{ 'Register.Nick Name' | translate }}" formControlName="NickName" />
+              </div>
+               <control-messages [control]="mySignupForm.controls.NickName"></control-messages>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <span class="icon-envelope"></span>
+                </div>
+                <input type="text" class="form-control" placeholder="{{ 'Login.Email' | translate }}" formControlName="Email" />
+              </div>
+               <control-messages [control]="mySignupForm.controls.Email"></control-messages>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <span class="icon-lock"></span>
+                </div>
+                <input type="password" class="form-control" placeholder="{{ 'Login.Password' | translate }}" formControlName="Password" />
+              </div>
+               <control-messages [control]="mySignupForm.controls.Password"></control-messages>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <span class="icon-unlock-alt"></span>
+                </div>
+                <input type="password" validate class="form-control" placeholder="{{ 'Register.Confirm Password' | translate }}" formControlName="ConfirmPassword" />
+              </div>
+               <control-messages [control]="mySignupForm.controls.ConfirmPassword"></control-messages>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6">
+
+              <my-date-picker formControlName="Birthday" placeholder="{{ 'Register.Birth Date' | translate }}" [options]="myDatePickerOptions" [(ngModel)]="model" required></my-date-picker>
+                 <control-messages [control]="mySignupForm.controls.Birthday"></control-messages>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <span class="icon-globe"></span>
+                </div>
+                <select class="form-control" formControlName="Country">
+                <option value="">{{ 'Register.Select Country' | translate }}</option>
+                <option *ngFor="let country of countries" [ngValue]="country.cou_id">{{country.cou_description}}</option>
+              </select>
+              </div>
+               <control-messages [control]="mySignupForm.controls.Country"></control-messages>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-2">{{ 'Register.Profile Photo' | translate }}:</div>
+            <div class="col-md-10">
+                <input type="file" name="file" (change)="selectFile($event)" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6">
+              {{ 'Register.Already have an account?' | translate }} <a [routerLink]="['/','login']">{{ 'Login.Log In' | translate }} </a>
+            </div>
+            <div class="col-md-6">
+              <button type="submit" [disabled]="!mySignupForm.valid" class="btn btn-success pull-right">{{ 'Login.Register' | translate }}</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

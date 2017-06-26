@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a [routerLink]="['/admin','dashboard']">{{'Menu.Dashboard' | translate }}</a></li>
+        <li class="active">{{'User.User Management' | translate }}</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="header">
+        <h2>{{'User.Users Details List' | translate }}</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block">
+            <div class="content">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="col-xs-2">
+                    <label class="label-control">{{'UserRole.Rows on page' | translate }}</label>
+                    <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
+                    <option [ngValue]="5">5</option>
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="15">15</option>
+                </select>
+                  </div>
+                  <div class="col-xs-5 pull-right">
+                    <label class="label-control">{{'UserRole.Search' | translate }}:</label>
+                    <input class="form-control input-sm" [(ngModel)]="filterQuery" placeholder="{{'UserRole.Search' | translate }}" />
+                  </div>
+                </div>
+              </div>
+              <table class="table table-striped" [mfData]="data | dataUserPermissionFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+                [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                <thead>
+                  <tr>
+                    <th style="width:10%">
+                      <mfDefaultSorter by="use_name">{{'User.Name' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:10%">
+                      <mfDefaultSorter by="use_nick_name">{{'User.NickName' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:10%">
+                      <mfDefaultSorter by="use_last_name">{{'Register.Last Name' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:10%">
+                      <mfDefaultSorter by="use_email">{{'Login.Email' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:10%">
+                      <mfDefaultSorter by="use_birthday">{{'Register.Birth Date' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:10%">
+                      <mfDefaultSorter by="use_create">{{'User.Creation Date' | translate }}</mfDefaultSorter>
+                    </th>
+                    <th style="width:10%">
+                      <mfDefaultSorter by="cou_description">{{'User.Country' | translate }}</mfDefaultSorter>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of mf.data">
+                    <td>{{item.use_name}}</td>
+                    <td>{{item.use_nick_name}}</td>
+                    <td>{{item.use_last_name}}</td>
+                    <td>{{item.use_email}}</td>
+                    <td>{{item.use_birthday | date : 'dd/MM/yyyy'}}</td>
+                    <td>{{item.use_create | date : 'dd/MM/yyyy'}}</td>
+                    <td>{{item.cou_description}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="12" style="text-align: right">
+                      <mfBootstrapPaginator></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

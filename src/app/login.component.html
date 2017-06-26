@@ -1,0 +1,80 @@
+<div class="bg-img-num1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar brb" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-reorder"></span>
+                        </button>
+                        <a class="navbar-brand" [routerLink]="['/','home']"><img src="./assets/img/book.png" /></a>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <div class="nav navbar-nav pull-right">
+                            <select (change)="onLanguageChange($event);">
+                            <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="login-block">
+            <div class="block block-drop-shadow">
+                <div class="head bg-dot20">
+                    <div class="head">
+                        <div class="user">
+                            <div class="info user-change" style="opacity: 1;">
+                                <img src="./assets/img/user.png" class="img-circle img-thumbnail">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <form [formGroup]="myLoginFrom" (ngSubmit)="onUserLogin()">
+                            <div class="form-row user-change-row" style="display: block;">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="icon-user"></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="{{ 'Login.Email' | translate }}" formControlName="use_email">
+                                    </div>
+                                    <control-messages [control]="myLoginFrom.controls.use_email"></control-messages>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="icon-key"></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="{{ 'Login.Password' | translate }}" formControlName="use_password">
+                                    </div>
+                                    <control-messages [control]="myLoginFrom.controls.use_password"></control-messages>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <button type="Submit" [disabled]="!myLoginFrom.valid" class="btn btn-success btn-block">{{ 'Login.Log In' | translate }}</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <a [routerLink]="['/','signup']" class="btn btn-primary btn-block">{{ 'Login.Register' | translate }}</a>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <a [routerLink]="['/','forgot']" class="btn btn-link ">{{ 'Login.Forgot your password?' | translate }}</a> |
+                                    <a
+                                        [routerLink]="['/','home']" class="btn btn-link">{{ 'Login.Go Back' | translate }}</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

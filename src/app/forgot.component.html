@@ -1,0 +1,62 @@
+<div class="bg-img-num1">
+     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar brb" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-reorder"></span>
+                        </button>
+                        <a class="navbar-brand" [routerLink]="['/','home']"><img src="./assets/img/book.png" /></a>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <div class="nav navbar-nav pull-right">
+                            <select (change)="onLanguageChange($event);">
+                            <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="login-block">
+            <div class="block block-drop-shadow">
+                <div class="head bg-dot20">
+                    <div class="head">
+                        <div class="user">
+                            <div class="info user-change" style="opacity: 1;">
+                                <img src="./assets/img/forgot.png" class="img-circle img-thumbnail">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <form [formGroup]="myForgotPasswordFrom" (ngSubmit)="onForgotPassword()">
+                            <div class="form-row user-change-row" style="display: block;">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="icon-user"></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="{{ 'Login.Email' | translate }}" formControlName="Email">
+                                    </div>
+                                    <control-messages [control]="myForgotPasswordFrom.controls.Email"></control-messages>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-top: 10px;">
+                                <div class="col-md-6">
+                                     <button type="submit" [disabled]="!myForgotPasswordFrom.valid" class="btn btn-success btn-block pull-right">{{ 'Forgot.Retrive' | translate }}</button>
+                                </div>
+                                <div class="col-md-6 pull-right">
+                                   <a [routerLink]="['/','login']" class="btn btn-primary btn-block">{{ 'Forgot.Home' | translate }}</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

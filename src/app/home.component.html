@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar brb" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-reorder"></span>
+                        </button>
+                    <a class="navbar-brand" [routerLink]="['/','home']"><img src="./assets/img/book.png" /></a>
+                </div>
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a [routerLink]="['/','login']">
+                                     <span class="icon-off"></span> {{ 'Login.Sign in' | translate }} 
+                                </a>
+                        </li>
+                    </ul>
+                    <div class=" nav navbar-nav pull-right">
+                        <select (change)="onLanguageChange($event);">
+                            <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+                            </select>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="block">
+                <div class="content">
+                    <img src="./assets/img/bookbanner.png" class="img-responsive" style="width:100%" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="block block-drop-shadow">
+                <div class="head bg-default bg-light-ltr">
+                    <h2>What Our Users Say About Us...</h2>
+                    <div class="head-panel nm">
+                        <div class="col-md-12">
+                            <div class="block">
+                                <div class="content">
+                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="item active">
+                                                <div class="carousel-content">
+                                                    <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum dolor
+                                                        sem, quis pharetra dui ultricies vel. Cras non pulvinar tellus, vel
+                                                        bibendum magna. Morbi tellus nulla, cursus non nisi sed, porttitor
+                                                        dignissim erat. Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                        elit. Nunc facilisis commodo lectus. Vivamus vel tincidunt enim,
+                                                        non vulputate ipsum. Ut pellentesque consectetur arcu sit amet scelerisque.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <div class="carousel-content">
+                                                    <p style="text-align: justify;">Nam a nisi et nisi tristique lacinia non sit amet orci. Duis blandit
+                                                        leo odio, eu varius nulla fringilla adipiscing. Praesent posuere
+                                                        blandit diam, sit amet suscipit justo consequat sed. Duis cursus
+                                                        volutpat ante at convallis. Integer posuere a enim eget imperdiet.
+                                                        Nulla consequat dui quis purus molestie fermentum. Donec faucibus
+                                                        sapien eu nisl placerat auctor. Pellentesque quis justo lobortis,
+                                                        tempor sapien vitae, dictum orci.</p>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <div class="carousel-content">
+                                                    <p style="text-align: justify;">Donec tristique eu sem et aliquam. Proin sodales elementum urna et euismod.
+                                                        Quisque nisl nisl, venenatis eget dignissim et, adipiscing eu tellus.
+                                                        Sed nulla massa, luctus id orci sed, elementum consequat est. Proin
+                                                        dictum odio quis diam gravida facilisis. Sed pharetra dolor a tempor
+                                                        tristique. Sed semper sed urna ac dignissim. Aenean fermentum leo
+                                                        at posuere mattis. Etiam vitae quam in magna viverra dictum.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                                <span class="icon-chevron-left"></span>
+                                            </a>
+                                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                                <span class="icon-chevron-right"></span>
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="page-footer">
+            <div class="page-footer-wrap">
+                <div class="side pull-left">
+                    <p>Copyirght @ Book Partner {{year}}. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
